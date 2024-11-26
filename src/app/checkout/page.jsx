@@ -24,7 +24,11 @@ const Checkout = () => {
   }, []);
 
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price, 0);
+    return (
+      Math.round(
+        cartItems.reduce((total, item) => total + item.price, 0) * 100
+      ) / 100
+    );
   };
 
   const handleInputChange = (e) => {
@@ -168,7 +172,7 @@ const Checkout = () => {
         <Link href="/success">
           <button
             type="submit"
-            className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300"
+            className="bg-green-600 text-white px-6 py-3 mt-2 rounded-md hover:bg-green-700 transition duration-300"
           >
             Place Order
           </button>

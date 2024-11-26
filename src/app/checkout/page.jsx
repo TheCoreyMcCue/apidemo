@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import axios from "axios";
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -9,8 +10,10 @@ const Checkout = () => {
     name: "",
     email: "",
     address: "",
+    phone: "",
     city: "",
     zip: "",
+    countryCode: "",
     cardNumber: "",
     expiryDate: "",
     cvv: "",
@@ -50,6 +53,18 @@ const Checkout = () => {
 
     // Redirect to thank-you page (you can create a thank-you page if needed)
     alert("Order placed successfully!");
+
+    // axios
+    //   .post("https://api.ekata.com/3.3/identity_check", {
+    //     firstName: "Fred",
+    //     lastName: "Flintstone",
+    //   })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   };
 
   return (

@@ -17,6 +17,7 @@ const Checkout = () => {
     cardNumber: "",
     expiryDate: "",
     cvv: "",
+    risk: "",
   });
 
   // Load cart items from localStorage
@@ -53,18 +54,6 @@ const Checkout = () => {
 
     // Redirect to thank-you page (you can create a thank-you page if needed)
     alert("Order placed successfully!");
-
-    // axios
-    //   .post("https://api.ekata.com/3.3/identity_check", {
-    //     firstName: "Fred",
-    //     lastName: "Flintstone",
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
   };
 
   return (
@@ -111,7 +100,7 @@ const Checkout = () => {
             placeholder="Full Name"
             value={form.name}
             onChange={handleInputChange}
-            className="border rounded-md p-3 w-full"
+            className="border rounded-md p-3 w-full text-black"
             required
           />
           <input
@@ -120,7 +109,7 @@ const Checkout = () => {
             placeholder="Email Address"
             value={form.email}
             onChange={handleInputChange}
-            className="border rounded-md p-3 w-full"
+            className="border rounded-md p-3 w-full text-black"
             required
           />
         </div>
@@ -131,7 +120,7 @@ const Checkout = () => {
           placeholder="Address"
           value={form.address}
           onChange={handleInputChange}
-          className="border rounded-md p-3 w-full"
+          className="border rounded-md p-3 w-full text-black"
           required
         />
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
@@ -141,7 +130,7 @@ const Checkout = () => {
             placeholder="City"
             value={form.city}
             onChange={handleInputChange}
-            className="border rounded-md p-3 w-full"
+            className="border rounded-md p-3 w-full text-black"
             required
           />
           <input
@@ -150,7 +139,16 @@ const Checkout = () => {
             placeholder="ZIP/Postal Code"
             value={form.zip}
             onChange={handleInputChange}
-            className="border rounded-md p-3 w-full"
+            className="border rounded-md p-3 w-full text-black"
+            required
+          />
+          <input
+            type="text"
+            name="countryCode"
+            placeholder="Country Code"
+            value={form.countryCode}
+            onChange={handleInputChange}
+            className="border rounded-md p-3 w-full text-black"
             required
           />
         </div>
@@ -162,7 +160,7 @@ const Checkout = () => {
             placeholder="Card Number"
             value={form.cardNumber}
             onChange={handleInputChange}
-            className="border rounded-md p-3 w-full"
+            className="border rounded-md p-3 w-full text-black"
             required
           />
           <input
@@ -171,7 +169,7 @@ const Checkout = () => {
             placeholder="MM/YY"
             value={form.expiryDate}
             onChange={handleInputChange}
-            className="border rounded-md p-3 w-full"
+            className="border rounded-md p-3 w-full text-black"
             required
           />
           <input
@@ -180,10 +178,33 @@ const Checkout = () => {
             placeholder="CVV"
             value={form.cvv}
             onChange={handleInputChange}
-            className="border rounded-md p-3 w-full"
+            className="border rounded-md p-3 w-full text-black"
             required
           />
         </div>
+
+        {/* Dropdown for Risk Level */}
+        <div className="mb-4">
+          <label
+            htmlFor="risk"
+            className="block text-sm font-medium text-black-700"
+          >
+            Risk Level
+          </label>
+          <select
+            name="risk"
+            value={form.risk}
+            onChange={handleInputChange}
+            className="border rounded-md p-3 w-1/2 text-black"
+            required
+          >
+            <option value="">Select Risk Level</option>
+            <option value="low">Low Risk</option>
+            <option value="medium">Medium Risk</option>
+            <option value="high">High Risk</option>
+          </select>
+        </div>
+
         <Link href="/success">
           <button
             type="submit"

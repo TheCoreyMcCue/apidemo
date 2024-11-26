@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const Navbar = () => {
@@ -7,32 +8,32 @@ const Navbar = () => {
       <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="text-2xl font-bold">
-          <a href="/" className="text-white hover:text-gray-400">
+          <Link href="/" className="text-white hover:text-gray-400">
             MyEcommerce
-          </a>
+          </Link>
         </div>
 
         {/* Navigation Links */}
         <div className="hidden md:flex space-x-6">
-          <a href="#home" className="text-white hover:text-gray-400">
+          <Link href="#home" className="text-white hover:text-gray-400">
             Home
-          </a>
-          <a href="#shop" className="text-white hover:text-gray-400">
+          </Link>
+          <Link href="#shop" className="text-white hover:text-gray-400">
             Shop
-          </a>
-          <a href="#about" className="text-white hover:text-gray-400">
+          </Link>
+          <Link href="#about" className="text-white hover:text-gray-400">
             About
-          </a>
-          <a href="#contact" className="text-white hover:text-gray-400">
+          </Link>
+          <Link href="#contact" className="text-white hover:text-gray-400">
             Contact
-          </a>
+          </Link>
         </div>
 
         {/* Cart Icon */}
         <div className="relative">
-          <a href="#cart" className="text-white hover:text-gray-400">
+          <Link href="#cart" className="text-white hover:text-gray-400">
             <ShoppingCartIcon className="w-6 h-6" />
-          </a>
+          </Link>
 
           {/* Cart Badge (optional) */}
           <div className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full w-3 h-3 flex items-center justify-center">

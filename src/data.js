@@ -69,4 +69,4 @@ export const products = [
   },
 ];
 
-export default products;
+export const fixtureRequests = [{}];

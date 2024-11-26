@@ -1,5 +1,5 @@
 import ProductCard from "./components/ProductCard";
-import products from "../data.js";
+import { products } from "../data.js";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 

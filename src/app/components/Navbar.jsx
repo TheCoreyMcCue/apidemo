@@ -7,7 +7,6 @@ import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);
 
-  // Function to update the cart count from localStorage
   const updateCartCount = () => {
     const storedCart = localStorage.getItem("cart");
     const cart = storedCart ? JSON.parse(storedCart) : [];
@@ -34,7 +33,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="text-2xl font-bold">
           <Link href="/" className="text-white hover:text-gray-400">
-            MyEcommerce
+            Super Shop
           </Link>
         </div>
 

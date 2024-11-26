@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import axios from "axios";
+import { useRouter } from "next/navigation"; // Import useRouter
 
 const Checkout = () => {
+  const router = useRouter(); // Initialize router
   const [cartItems, setCartItems] = useState([]);
   const [form, setForm] = useState({
     name: "",
@@ -50,10 +51,8 @@ const Checkout = () => {
     localStorage.removeItem("cart");
     setCartItems([]);
 
-    console.log(form);
-
-    // Redirect to thank-you page (you can create a thank-you page if needed)
-    alert("Order placed successfully!");
+    // Redirect to thank-you page
+    router.push("/success"); // Use router.push
   };
 
   return (
@@ -93,7 +92,7 @@ const Checkout = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <h2 className="text-2xl font-semibold mb-4">Shipping & Payment</h2>
 
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+        <div>
           <input
             type="text"
             name="name"
@@ -103,11 +102,23 @@ const Checkout = () => {
             className="border rounded-md p-3 w-full text-black"
             required
           />
+        </div>
+
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
           <input
             type="email"
             name="email"
             placeholder="Email Address"
             value={form.email}
+            onChange={handleInputChange}
+            className="border rounded-md p-3 w-full text-black"
+            required
+          />
+          <input
+            type="phone"
+            name="phone"
+            placeholder="Phone Number"
+            value={form.phone}
             onChange={handleInputChange}
             className="border rounded-md p-3 w-full text-black"
             required
@@ -199,20 +210,18 @@ const Checkout = () => {
             required
           >
             <option value="">Select Risk Level</option>
-            <option value="low">Low Risk</option>
-            <option value="medium">Medium Risk</option>
-            <option value="high">High Risk</option>
+            <option value="low_confidence_score">Low Risk</option>
+            <option value="medium_scores">Medium Risk</option>
+            <option value="high_confidence_score">High Risk</option>
           </select>
         </div>
 
-        <Link href="/success">
-          <button
-            type="submit"
-            className="bg-green-600 text-white px-6 py-3 mt-2 rounded-md hover:bg-green-700 transition duration-300"
-          >
-            Place Order
-          </button>
-        </Link>
+        <button
+          type="submit"
+          className="bg-green-600 text-white px-6 py-3 mt-2 rounded-md hover:bg-green-700 transition duration-300"
+        >
+          Place Order
+        </button>
       </form>
     </div>
   );

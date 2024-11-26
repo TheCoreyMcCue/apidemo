@@ -65,7 +65,7 @@ export const products = [
     description: "A soft and warm sweater, perfect for chilly days.",
     price: 39.99,
     image:
-      "https://images.stockcake.com/public/a/4/3/a43b65d1-f076-4132-b95f-d03c6d73d9ab_large/cozy-knit-sweater-stockcake.jpg",
+      "https://as2.ftcdn.net/v2/jpg/02/34/19/75/1000_F_234197570_P6NJHBQ1ZZafM4f4oMUzzdTtSyPo8vaN.jpg",
   },
 ];
 

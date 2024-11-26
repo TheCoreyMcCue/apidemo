@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
@@ -15,7 +17,7 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex space-x-6">
-          <Link href="#home" className="text-white hover:text-gray-400">
+          <Link href="/" className="text-white hover:text-gray-400">
             Home
           </Link>
           <Link href="#shop" className="text-white hover:text-gray-400">
@@ -31,7 +33,7 @@ const Navbar = () => {
 
         {/* Cart Icon */}
         <div className="relative">
-          <Link href="#cart" className="text-white hover:text-gray-400">
+          <Link href="/cart" className="text-white hover:text-gray-400">
             <ShoppingCartIcon className="w-6 h-6" />
           </Link>
 

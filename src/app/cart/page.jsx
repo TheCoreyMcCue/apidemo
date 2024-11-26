@@ -1,36 +1,33 @@
 "use client";
 
-const Cart = () => {
-  // Sample data for cart items
-  const cartItems = [
-    {
-      id: 1,
-      name: "Product A",
-      price: 50,
-      quantity: 2,
-      image:
-        "https://whitehillsknives.com/cdn/shop/files/vintage-genuine-cowhide-leather-jacket-men-161.webp?v=1686281119",
-    },
-    {
-      id: 2,
-      name: "Product B",
-      price: 30,
-      quantity: 1,
-      image:
-        "https://m.media-amazon.com/images/I/610FYl31-9L._AC_UF1000,1000_QL80_.jpg",
-    },
-    {
-      id: 3,
-      name: "Product C",
-      price: 20,
-      quantity: 3,
-      image:
-        "https://fitage.nl/cdn/shop/products/Smartwatch_1.jpg?v=1695242855",
-    },
-  ];
+import { useState, useEffect } from "react";
 
-  const calculateTotal = () =>
-    cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+const Cart = () => {
+  const [cartItems, setCartItems] = useState([]);
+
+  // Load cart items from localStorage on component mount
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    const cart = storedCart ? JSON.parse(storedCart) : [];
+    setCartItems(cart);
+  }, []);
+
+  // Remove item from cart
+  const removeFromCart = (itemId) => {
+    // Filter out the item to be removed
+    const updatedCart = cartItems.filter((item) => item.id !== itemId);
+
+    // Update state
+    setCartItems(updatedCart);
+
+    // Update localStorage
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  // Calculate total price
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + item.price, 0);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
@@ -59,15 +56,16 @@ const Cart = () => {
                       Quantity: {item.quantity}
                     </p>
                     <p className="text-sm text-gray-600">
-                      Price: ${item.price.toFixed(2)}
+                      Price: ${item.price}
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-bold">
-                    ${(item.price * item.quantity).toFixed(2)}
-                  </p>
-                  <button className="text-red-500 hover:underline mt-2">
+                  <p className="text-lg font-bold">${item.price}</p>
+                  <button
+                    onClick={() => removeFromCart(item.id)} // Handle removal
+                    className="text-red-500 hover:underline mt-2"
+                  >
                     Remove
                   </button>
                 </div>
@@ -77,9 +75,7 @@ const Cart = () => {
 
           {/* Total */}
           <div className="border-t pt-4 flex justify-between items-center">
-            <h3 className="text-2xl font-bold">
-              Total: ${calculateTotal().toFixed(2)}
-            </h3>
+            <h3 className="text-2xl font-bold">Total: ${calculateTotal()}</h3>
             <button className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600">
               Proceed to Checkout
             </button>

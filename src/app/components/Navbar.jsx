@@ -1,10 +1,33 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const Navbar = () => {
+  const [cartCount, setCartCount] = useState(0);
+
+  // Function to update the cart count from localStorage
+  const updateCartCount = () => {
+    const storedCart = localStorage.getItem("cart");
+    const cart = storedCart ? JSON.parse(storedCart) : [];
+    setCartCount(cart.length);
+  };
+
+  useEffect(() => {
+    // Initial fetch of cart count
+    updateCartCount();
+
+    // Listen for the custom "cart-updated" event
+    const handleCartUpdate = () => updateCartCount();
+    window.addEventListener("cart-updated", handleCartUpdate);
+
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener("cart-updated", handleCartUpdate);
+    };
+  }, []);
+
   return (
     <header className="bg-gray-900 text-white shadow-md">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -35,12 +58,13 @@ const Navbar = () => {
         <div className="relative">
           <Link href="/cart" className="text-white hover:text-gray-400">
             <ShoppingCartIcon className="w-6 h-6" />
-          </Link>
 
-          {/* Cart Badge (optional) */}
-          <div className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full w-3 h-3 flex items-center justify-center">
-            3
-          </div>
+            {cartCount > 0 && (
+              <div className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full w-3 h-3 flex items-center justify-center">
+                {cartCount}
+              </div>
+            )}
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}

@@ -69,4 +69,56 @@ export const products = [
   },
 ];
 
-export const fixtureRequests = [{}];
+export const lowRisk = {
+  "primary.email.valid": true,
+  "primary.email.first_seen_days": 0,
+  "primary.email.to_name": "match",
+  "ip.risk": false,
+  "ip.primary_address_distance": 0,
+  "ip.secondary_address_distance": 0,
+  "primary.phone.valid": true,
+  "primary.phone.line_type": "mobile",
+  "primary.phone.to_name": "match",
+  "primary.address.valid": false,
+  "primary.address.to_name": "match",
+  "secondary.address.valid": null,
+  "secondary.address.to_name": null,
+  identity_network_score: 0.5,
+  transaction_risk_score: 50,
+};
+
+export const mediumRisk = {
+  "primary.email.valid": true,
+  "primary.email.first_seen_days": 0,
+  "primary.email.to_name": "no-match",
+  "ip.risk": false,
+  "ip.primary_address_distance": 0,
+  "ip.secondary_address_distance": 0,
+  "primary.phone.valid": true,
+  "primary.phone.line_type": "landline",
+  "primary.phone.to_name": "no-match",
+  "primary.address.valid": false,
+  "primary.address.to_name": "no-match",
+  "secondary.address.valid": null,
+  "secondary.address.to_name": null,
+  identity_network_score: 0.5,
+  transaction_risk_score: 250,
+};
+
+export const highRisk = {
+  "primary.email.valid": false,
+  "primary.email.first_seen_days": null,
+  "primary.email.to_name": "not-found",
+  "ip.risk": false,
+  "ip.primary_address_distance": 0,
+  "ip.secondary_address_distance": 0,
+  "primary.phone.valid": false,
+  "primary.phone.line_type": null,
+  "primary.phone.to_name": "not-found",
+  "primary.address.valid": false,
+  "primary.address.to_name": "not-found",
+  "secondary.address.valid": null,
+  "secondary.address.to_name": null,
+  identity_network_score: 0.5,
+  transaction_risk_score: 450,
+};

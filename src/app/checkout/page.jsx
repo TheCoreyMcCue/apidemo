@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // Import useRouter
+import { useRouter } from "next/navigation";
+import { lowRisk, mediumRisk, highRisk } from "../../data.js";
 
 const Checkout = () => {
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
   const [cartItems, setCartItems] = useState([]);
   const [form, setForm] = useState({
     name: "",
@@ -20,6 +21,9 @@ const Checkout = () => {
     cvv: "",
     risk: "",
   });
+
+  const [riskData, setRiskData] = useState(null);
+  const [displayRiskData, setDisplayData] = useState(false);
 
   // Load cart items from localStorage
   useEffect(() => {
@@ -39,20 +43,36 @@ const Checkout = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
+
+    if (name === "risk") {
+      // Set risk data based on selected risk level
+      let selectedRiskData;
+      if (value === "low_confidence_score") {
+        selectedRiskData = lowRisk;
+      } else if (value === "medium_scores") {
+        selectedRiskData = mediumRisk;
+      } else if (value === "high_confidence_score") {
+        selectedRiskData = highRisk;
+      } else {
+        selectedRiskData = null;
+      }
+      setRiskData(selectedRiskData);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simulate form submission
-    console.log("Order submitted!", { form, cartItems });
+    // Log the submitted order details for debugging
+    console.log("Order submitted!", { form, cartItems, riskData });
+    setDisplayData(true);
 
-    // Clear cart after submission
+    // Simulate API success response
+    // alert("Order placed successfully!");
+    // Clear cart after successful submission
     localStorage.removeItem("cart");
     setCartItems([]);
-
-    // Redirect to thank-you page
-    router.push("/success"); // Use router.push
+    // router.push("/success");
   };
 
   return (
@@ -215,6 +235,33 @@ const Checkout = () => {
             <option value="high_confidence_score">High Risk</option>
           </select>
         </div>
+
+        {/* Display Risk Data */}
+        {riskData && displayRiskData && (
+          <div className="p-4 border rounded-md bg-black-100">
+            <h3 className="text-lg font-semibold">Risk Analysis Result:</h3>
+            <div className="mt-4">
+              {form.risk === "low_confidence_score" && (
+                <p className="text-green-700 font-semibold">
+                  ✅ Order successfully placed!
+                </p>
+              )}
+              {form.risk === "medium_scores" && (
+                <p className="text-yellow-600 font-semibold">
+                  ⚠️ Additional verification required. Such as 2FA.
+                </p>
+              )}
+              {form.risk === "high_confidence_score" && (
+                <p className="text-red-700 font-semibold">
+                  ❌ Order rejected due to high risk.
+                </p>
+              )}
+            </div>
+            <pre className="text-sm text-white-700 mt-2">
+              {JSON.stringify(riskData, null, 2)}
+            </pre>
+          </div>
+        )}
 
         <button
           type="submit"

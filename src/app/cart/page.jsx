@@ -83,7 +83,9 @@ const Cart = () => {
 
           {/* Total */}
           <div className="border-t pt-4 flex justify-between items-center">
-            <h3 className="text-2xl font-bold">Total: ${calculateTotal()}</h3>
+            <h3 className="text-2xl font-bold">
+              Total: ${Math.round(calculateTotal() * 100) / 100}
+            </h3>
             <Link href="/checkout">
               <button className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600">
                 Proceed to Checkout

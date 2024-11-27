@@ -248,7 +248,7 @@ const Checkout = () => {
               )}
               {form.risk === "medium_scores" && (
                 <p className="text-yellow-600 font-semibold">
-                  ⚠️ Additional verification required. Such as 2FA.
+                  ⚠️ Additional verification required. Trigger 2FA.
                 </p>
               )}
               {form.risk === "high_confidence_score" && (
